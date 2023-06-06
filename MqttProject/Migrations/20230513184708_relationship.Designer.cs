@@ -12,8 +12,8 @@ using MqttProject.Data;
 namespace MqttProject.Migrations
 {
     [DbContext(typeof(contactData))]
-    [Migration("20230509083932_ModemGorevs")]
-    partial class ModemGorevs
+    [Migration("20230513184708_relationship")]
+    partial class relationship
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ namespace MqttProject.Migrations
                     b.Property<int>("Gun")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Komutid")
+                    b.Property<int?>("KomutId")
                         .HasColumnType("int");
 
                     b.Property<string>("ModemSeriNo")
@@ -134,11 +134,11 @@ namespace MqttProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Komutid")
+                    b.HasIndex("KomutId")
                         .IsUnique()
-                        .HasFilter("[Komutid] IS NOT NULL");
+                        .HasFilter("[KomutId] IS NOT NULL");
 
-                    b.ToTable("ModemGorev");
+                    b.ToTable("ModemGorevs");
                 });
 
             modelBuilder.Entity("MqttProject.Models.contact", b =>
@@ -164,9 +164,11 @@ namespace MqttProject.Migrations
 
             modelBuilder.Entity("MqttProject.Models.ModemGorev", b =>
                 {
-                    b.HasOne("MqttProject.Models.Komut", null)
+                    b.HasOne("MqttProject.Models.Komut", "Komut")
                         .WithOne("ModemGorev")
-                        .HasForeignKey("MqttProject.Models.ModemGorev", "Komutid");
+                        .HasForeignKey("MqttProject.Models.ModemGorev", "KomutId");
+
+                    b.Navigation("Komut");
                 });
 
             modelBuilder.Entity("MqttProject.Models.Komut", b =>

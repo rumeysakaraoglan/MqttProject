@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MqttProject.Data;
-
+using System.Text;
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,3 +48,23 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+MqttClient mqttClient = new MqttClient("broker.hivemq.com");
+string clientId = Guid.NewGuid().ToString();
+
+mqttClient.Connect(clientId);
+Console.WriteLine("Abone Olundu: test/deneme");
+
+Console.WriteLine("Mesajý girin: ");
+string message = Console.ReadLine();
+string Topic = "test/deneme";
+mqttClient.Publish(Topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, true);
+
+
+
+app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials

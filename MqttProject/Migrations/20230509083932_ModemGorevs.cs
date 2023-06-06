@@ -20,7 +20,7 @@ namespace MqttProject.Migrations
                     CihazId = table.Column<int>(type: "int", nullable: false),
                     ModemId = table.Column<int>(type: "int", nullable: false),
                     KomutKod = table.Column<int>(type: "int", nullable: false),
-                    KomutParams = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KomutParams = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BaglantiDenemeSayisi = table.Column<int>(type: "int", nullable: false),
                     Tarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataTime = table.Column<DateTime>(type: "datetime2", nullable: false),

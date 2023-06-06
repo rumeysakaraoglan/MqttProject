@@ -70,7 +70,6 @@ namespace MqttProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KomutParams")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ModemId")

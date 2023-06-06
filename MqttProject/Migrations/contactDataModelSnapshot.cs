@@ -67,7 +67,6 @@ namespace MqttProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KomutParams")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ModemId")
@@ -104,7 +103,7 @@ namespace MqttProject.Migrations
                     b.Property<int>("Gun")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Komutid")
+                    b.Property<int?>("KomutId")
                         .HasColumnType("int");
 
                     b.Property<string>("ModemSeriNo")
@@ -132,9 +131,9 @@ namespace MqttProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Komutid")
+                    b.HasIndex("KomutId")
                         .IsUnique()
-                        .HasFilter("[Komutid] IS NOT NULL");
+                        .HasFilter("[KomutId] IS NOT NULL");
 
                     b.ToTable("ModemGorevs");
                 });
@@ -162,9 +161,11 @@ namespace MqttProject.Migrations
 
             modelBuilder.Entity("MqttProject.Models.ModemGorev", b =>
                 {
-                    b.HasOne("MqttProject.Models.Komut", null)
+                    b.HasOne("MqttProject.Models.Komut", "Komut")
                         .WithOne("ModemGorev")
-                        .HasForeignKey("MqttProject.Models.ModemGorev", "Komutid");
+                        .HasForeignKey("MqttProject.Models.ModemGorev", "KomutId");
+
+                    b.Navigation("Komut");
                 });
 
             modelBuilder.Entity("MqttProject.Models.Komut", b =>

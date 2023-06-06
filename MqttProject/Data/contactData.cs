@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MqttProject.Migrations;
 using MqttProject.Models;
 using System.Collections.Generic;
 using static MqttProject.Models.contact;
@@ -16,6 +17,7 @@ namespace MqttProject.Data
         public DbSet<contact> Contacts { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Komut> Komuts { get; set; }
+        public DbSet<Connect> Connects { get; set; }
 
     }
 }
